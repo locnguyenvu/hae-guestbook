@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <header>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    </header>
+    <body>
+        <div class="container" id="app">
+            <div class="row">
+                <div class="col-sm" v-if="!isLogin">
+                    <form>
+                        <fieldset>
+                            <legend>Login</legend>
+                            <div class="row input-group">
+                                <label class="col-md-4">Username</label>
+                                <input type="string" class="col-md-8" v-model="loginUsername" />
+                            </div>
+                            <div class="row input-group">
+                                <label class="col-md-4">Password</label>
+                                <input type="string" class="col-md-8" v-model="loginPassword" v-on:keyup.13="login" />
+                            </div>
+                        </fieldset>
+                        <button type="button" v-on:click="login">Login</button> <span style="color:red;" v-if="loginFailed">Đăng nhập không thành công</span>
+                    </form>
+                </div>
+                <div class="col-sm" v-if="isLogin">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h3>Guestbook Admin Page</h3>
+                        </div>
+                    </div>
+                    <form-edit-comment v-for="gb in listGuestbook" v-bind:comment="gb" v-bind:token="token" v-on:reload-comment-list="loadCommentList"></form-edit-comment>
+                </div>
+            </div>
+        </div>
+        <script src="js/hae.js"></script>
+        <script src="js/admin.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,60 @@
+#!/usr/bin/env php
+<?php
+
+
+
+$task = $argv[1];
+
+switch ($task) {
+    case 'initDb':
+        initDb();
+        break;
+    case 'resetDb':
+        resetDb();
+        break;
+    default:
+        echo 'Commands: initDb'.PHP_EOL;
+}
+
+function initDb()
+{
+    $con = new \PDO("sqlite:db/schema.sqlite3");
+
+    $commands = [
+        'CREATE TABLE IF NOT EXISTS guest_book (
+            id   INTEGER PRIMARY KEY,
+            username TEXT NOT NULL,
+            content TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            is_deleted INTEGER
+        )',
+        'INSERT INTO `guest_book` (username, content, created_at, is_deleted)
+        VALUES ("Issac","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at velit velit. Sed condimentum orci nulla, sit amet tempor augue gravida id. Curabitur dapibus ut lectus vitae vulputate.", "2019-12-01", 0)',
+        'INSERT INTO `guest_book` (username, content, created_at, is_deleted)
+        VALUES ("Newton","Proin rhoncus bibendum leo. Sed quis ullamcorper mi. Sed ornare viverra pretium.", "2019-12-02", 0)',
+        'INSERT INTO `guest_book` (username, content, created_at, is_deleted)
+        VALUES ("Tesla","Mauris et feugiat elit. Morbi convallis metus et dui blandit, a egestas nisl tempor. ", "2019-12-03", 0)',
+    ];
+
+    foreach ($commands as $command) {
+        $con->exec($command);
+    }
+
+    echo PHP_EOL.' table created!'.PHP_EOL;
+    echo 'Tables:'.PHP_EOL;
+    $stmt = $con->query("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name");
+    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        echo "\t- ".$row['name'];
+    }
+}
+
+function resetDb() {
+    $con = new \PDO("sqlite:db/schema.sqlite3");
+    $commands = [
+        'DROP TABLE guest_book;'
+    ];
+    foreach ($commands as $command) {
+        $con->exec($command);
+    }
+    initDb();
+}

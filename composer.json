@@ -1,0 +1,23 @@
+{
+    "name": "hometest/hae",
+    "description": "Home test",
+    "type": "project",
+    "authors": [
+        {
+            "name": "loc.nguyenvu",
+            "email": "nvuloc@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Hae\\": "src/"
+        },
+        "files": [
+            "src/helper_functions.php"
+        ]
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.0"
+    }
+}

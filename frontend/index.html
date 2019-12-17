@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <header>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    </header>
+    <body>
+        <div id="app">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+                        <h1>Hae hometest - listGuestbook</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+                        <form-submit-comment v-on:reload-comment-list="loadCommentList"></form-submit-comment>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+                        <div class="container">
+                            <div class="row">
+                                
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div v-for="gb in listGuestbook" class="row">
+                                <div class="col-sm-12">
+                                    <div class="card fluid">
+                                        <div class="section dark">
+                                            <div row>
+                                                <small>#{{gb.id}}</small> <h3>{{gb.username}}</h3> <sub style="float:right">{{gb.created_at}}</sub>
+                                            </div>
+                                        </div>
+                                        <div class="section">
+                                            <div class="col-sm-12">{{gb.content}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/hae.js"></script>
+        <script src="js/client.js"></script>
+    </body>
+</html>
+
