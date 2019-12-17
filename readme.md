@@ -72,7 +72,7 @@ Domain: http://api.hae.local
 
 1. *GET* `/guestbook` : List all comments
 2. *POST* `/guestbok` : Create comment
-3. *POST `/login` : Admin login
+3. *POST* `/login` : Admin login
 4. *GET* `/guestbook/{id}` : Get comment detail by id (*)
 5. *PUT* `/guestbook/{id}` : Edit comment content (*)
 6. *DELETE* `/guestbook/{id}` : Delete comment (*)
